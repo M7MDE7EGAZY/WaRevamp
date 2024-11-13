@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="scope">
+        <item>com.whatsapp</item>
+    </string-array>
+    <string-array name="antirevoke_entries">
+        <item>Disabled</item>
+        <item>Show Text</item>
+        <item>Show Icon</item>
+    </string-array>
+    <string-array name="antirevoke_values">
+        <item>disable</item>
+        <item>text</item>
+        <item>icon</item>
+    </string-array>
+</resources>

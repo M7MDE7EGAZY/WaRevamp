@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/clean_database">
+        <Preference
+            android:title="@string/clean_msgstore"
+            android:summary="@string/clean_msgstore_sum"
+            android:key="msgstore" />
+        <Preference
+            android:title="@string/clean_axolotl"
+            android:summary="@string/clean_axolotl_sum"
+            android:key="axolotl" />
+        <Preference
+            android:title="@string/clean_wa"
+            android:summary="@string/clean_wa_sum"
+            android:key="wa" />
+        <Preference
+            android:title="@string/clean_sticker"
+            android:summary="@string/clean_sticker_sum"
+            android:key="sticker" />
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>

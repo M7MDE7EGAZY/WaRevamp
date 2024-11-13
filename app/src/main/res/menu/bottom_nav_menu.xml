@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/perso"
+        android:id="@+id/perso"
+        android:icon="@drawable/twotone_auto_awesome_24"/>
+    <item
+        android:title="@string/home"
+        android:id="@+id/home"
+        android:icon="@drawable/twotone_home_24"/>
+    <item
+        android:title="@string/privacy"
+        android:id="@+id/privacy"
+        android:icon="@drawable/twotone_lock_24"/>
+</menu>

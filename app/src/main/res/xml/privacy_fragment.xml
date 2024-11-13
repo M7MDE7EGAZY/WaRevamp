@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/antirevoke_category" >
+        <rikka.preference.SimpleMenuPreference
+            android:title="@string/antirevoke"
+            android:summary="@string/antirevoke_sum"
+            android:defaultValue="disable"
+            android:key="antiRevoke"
+            android:entries="@array/antirevoke_entries"
+            android:entryValues="@array/antirevoke_values" />
+        <rikka.preference.SimpleMenuPreference
+            android:title="@string/antirevoke_status"
+            android:summary="@string/antirevoke_status_sum"
+            android:defaultValue="disable"
+            android:key="antiRevokeStatus"
+            android:entries="@array/antirevoke_entries"
+            android:entryValues="@array/antirevoke_values"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/viewonce" >
+    <rikka.material.preference.MaterialSwitchPreference
+        android:title="@string/viewonce"
+        android:summary="@string/viewonce_sum"
+        android:key="viewOnce"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/hidereceipt" >
+        <rikka.material.preference.MaterialSwitchPreference
+            android:title="@string/hidereceipt"
+            android:summary="@string/hidereceipt_sum"
+            android:key="hideReceipt"/>
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>

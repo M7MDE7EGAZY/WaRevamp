@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="InfoCard">
+        <attr name="android:title" format="string" />
+        <attr name="android:subtitle" format="string" />
+        <attr name="waversion" format="string" />
+        <attr name="version" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ItemsCard">
+        <attr name="android:title" format="string" />
+        <attr name="android:subtitle" format="string" />
+        <attr name="android:icon" format="reference" />
+    </declare-styleable>
+</resources>

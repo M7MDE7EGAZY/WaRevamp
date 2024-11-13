@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <rikka.material.preference.MaterialSwitchPreference
+        android:title="@string/imagequality"
+        android:summary="@string/imagequality_sum"
+        android:key="imageQuality" />
+    <rikka.material.preference.MaterialSwitchPreference
+        android:title="@string/videoquality"
+        android:summary="@string/videoquality_sum"
+        android:key="videoQuality" />
+</androidx.preference.PreferenceScreen>

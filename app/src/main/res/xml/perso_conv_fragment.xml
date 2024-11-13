@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <rikka.material.preference.MaterialSwitchPreference
+            android:title="@string/new_menu_ui"
+            android:summary="@string/new_menu_ui_sum"
+            android:key="novoMenu" />
+
+</androidx.preference.PreferenceScreen>
