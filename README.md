@@ -1,7 +1,8 @@
 # Wa Revamp
-Continuation of the Old MdgWa
+Continuation of the Old MdgWa.
+More information coming soon...
 
 ## Download
-[Releases](https://github.com/ItsMadruga/WaRevamp/releases)
+[GitHub Actions](https://github.com/ItsMadruga/WaRevamp/actions)
 
-more information coming soon...
+
