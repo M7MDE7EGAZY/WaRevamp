@@ -526,6 +526,17 @@ public class References {
         return result;
     }
 
+    // Expiration Time
+
+    public synchronized static Class<?> expirationTimeClass(ClassLoader loader) throws Exception {
+        Class<?> result = getClazz("expirationTimeClass");
+        if (result != null) return result;
+        result = getIns().findClassByString(StringMatchType.Contains, loader, "number format not valid: ");
+        if (result == null) throw new Exception("expirationTimeMethod not found");
+        saveClassPath(result, "expirationTimeClass");
+        return result;
+    }
+
     public static void start() {
         ins = new References();
     }

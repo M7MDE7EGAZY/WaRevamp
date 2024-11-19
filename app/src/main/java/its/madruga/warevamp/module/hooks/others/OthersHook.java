@@ -7,9 +7,18 @@ import de.robv.android.xposed.XposedBridge;
 import its.madruga.warevamp.module.hooks.core.HooksBase;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Objects;
 
+import static its.madruga.warevamp.module.references.References.expirationTimeClass;
 import static its.madruga.warevamp.module.references.References.propsMethod;
+import static its.madruga.warevamp.module.references.ReferencesUtils.findMethodUsingFilter;
+
+import android.util.Log;
 
 public class OthersHook extends HooksBase {
     HashMap<Integer, Boolean> propList;
@@ -21,6 +30,8 @@ public class OthersHook extends HooksBase {
     @Override
     public void doHook() throws Exception {
         super.doHook();
+
+
 
         propList = new HashMap<>();
 
@@ -35,6 +46,7 @@ public class OthersHook extends HooksBase {
         propList.put(2889, prefs.getBoolean("novoMenu", false));
 
         hookProps();
+        hookExpirationTime();
     }
 
     private void hookProps() throws Exception {
@@ -46,6 +58,22 @@ public class OthersHook extends HooksBase {
                 if (propList.containsKey(i)) {
                     param.setResult(propList.get(i));
                 }
+            }
+        });
+    }
+
+    private void hookExpirationTime() throws Exception {
+        Class<?> expirationClass = expirationTimeClass(loader);
+        XposedBridge.hookAllConstructors(expirationClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                Method method = findMethodUsingFilter(param.thisObject.getClass(), m -> m.getReturnType().equals(Date.class));
+                XposedBridge.hookMethod(method, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        param.setResult(new Date(61728058798000L));
+                    }
+                });
             }
         });
     }

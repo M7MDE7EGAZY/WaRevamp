@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import its.madruga.warevamp.App;
 import its.madruga.warevamp.R;
+import its.madruga.warevamp.core.XposedChecker;
 import its.madruga.warevamp.databinding.RootFragmentBinding;
 import its.madruga.warevamp.ui.activitys.AboutActivity;
 import its.madruga.warevamp.ui.fragments.core.BaseFragment;
@@ -38,6 +41,15 @@ public class RootFragment extends BaseFragment {
     public static class RootPreference extends BasePreferenceActivity {
         @Override
         public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+            if (!XposedChecker.isActive()) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
+                builder.setTitle(R.string.module_status);
+                builder.setMessage(App.getInstance().getString(R.string.module_status) + "  " + App.getInstance().getString(R.string.module_disable));
+                builder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> dialogInterface.dismiss());
+                builder.create().show();
+
+                return;
+            }
             super.onCreatePreferences(savedInstanceState, rootKey);
             setPreferencesFromResource(R.xml.root_fragment, rootKey);
 

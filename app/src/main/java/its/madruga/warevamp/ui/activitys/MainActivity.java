@@ -23,6 +23,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.color.MaterialColors;
 
+import java.util.Objects;
+
 import its.madruga.warevamp.App;
 import its.madruga.warevamp.BuildConfig;
 import its.madruga.warevamp.R;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setupInfoCard();
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setTitle(R.string.app_name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
     }
 
     public void setupInfoCard() {
@@ -50,14 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
         infoCard.setTitle(App.getInstance().getString(R.string.app_name));
         infoCard.setSubTitle(App.getInstance().getString(R.string.app_desc));
-        SpannableString versionString = new SpannableString(App.getInstance().getString(R.string.module_version) + " " + BuildConfig.VERSION_NAME);
-        versionString.setSpan(new StyleSpan(Typeface.BOLD), 0, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        versionString.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 15, versionString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        SpannableString versionString = new SpannableString(App.getInstance().getString(R.string.module_status) + " " + (XposedChecker.isActive() ? App.getInstance().getString(R.string.module_enable) : App.getInstance().getString(R.string.module_disable)));
+
+        versionString.setSpan(new StyleSpan(Typeface.BOLD), 0, 15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        versionString.setSpan(new ForegroundColorSpan(XposedChecker.isActive() ? MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary) : Color.RED), 15, versionString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         infoCard.setVersion(versionString);
 
-        if (!isInstalled(WHATSAPP_PACKAGE) || !XposedChecker.isActive()){
+        if (!isInstalled(WHATSAPP_PACKAGE)){
             setDisableWpp();
         }
+
+        if (!XposedChecker.isActive()) {
+            binding.infos.getWaVersionView().setVisibility(View.GONE);
+            return;
+        };
 
         sendCheckWpp();
 
@@ -65,14 +76,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 SpannableString versionString = new SpannableString(App.getInstance().getString(R.string.whatsapp_version) + " " + intent.getStringExtra("wa_version"));
+
                 versionString.setSpan(new StyleSpan(Typeface.BOLD), 0, 18, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 versionString.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 18, versionString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 infoCard.setWaVersion(versionString);
 
                 SpannableString rebootString = new SpannableString(App.getInstance().getString(R.string.reboot_wpp));
+
                 rebootString.setSpan(new StyleSpan(Typeface.BOLD), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 rebootString.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 wppReboot.setSubTitle(rebootString);
+                binding.wppReboot.setVisibility(View.VISIBLE);
                 wppReboot.setEnabled(true);
             }
         };
@@ -85,20 +103,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDisableWpp() {
-        SpannableString versionString = new SpannableString(App.getInstance().getString(R.string.module_version) + " " + App.getInstance().getString(R.string.module_disable));
-        versionString.setSpan(new StyleSpan(Typeface.BOLD), 0, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        versionString.setSpan(new ForegroundColorSpan(Color.RED), 16, versionString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString versionString = new SpannableString(App.getInstance().getString(R.string.whatsapp_version) + " " + App.getInstance().getString(R.string.module_disable));
+
+        versionString.setSpan(new StyleSpan(Typeface.BOLD), 0, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        versionString.setSpan(new ForegroundColorSpan(Color.RED), 18, versionString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         binding.infos.setWaVersion(versionString);
 
-        SpannableString rebootString = new SpannableString(App.getInstance().getString(R.string.reboot_wpp));
-        rebootString.setSpan(new ForegroundColorSpan(Color.RED), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        binding.wppReboot.setSubTitle(rebootString);
-        binding.wppReboot.setEnabled(false);
+        binding.wppReboot.setVisibility(View.GONE);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         getOnBackPressedDispatcher().onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupInfoCard();
     }
 }

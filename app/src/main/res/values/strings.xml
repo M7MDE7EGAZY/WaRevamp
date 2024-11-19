@@ -2,8 +2,9 @@
     <string name="app_name">Wa Revamp</string>
     <string name="app_desc">An Xposed module to customize your WhatsApp.</string>
     <string name="whatsapp_version">WhatsApp Version:</string>
-    <string name="module_version">Module Version:</string>
+    <string name="module_status">Module Status:</string>
     <string name="module_disable">Disable</string>
+    <string name="module_enable">Enable</string>
     <string name="module_author">Author: I\'ts Madruga</string>
     <string name="module_telegram">Telegram Channgel: @warevampmodule</string>
     <string name="message_deleted">Message Deleted</string>
