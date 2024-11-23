@@ -1,13 +1,5 @@
 | FIXED |
 
-- Icon in the Groups Tab.
-- Fix Workflow Bugs.
+- Module did not activate
 
 | ADDED |
-
-- Bot that sends module updates to the group.
-- Signing key added.
-
-| Notice |
-
-- I know I'm not bringing frequent updates or new features, I'm sorry but I'm in the last days of school and it's very busy, as soon as the school year ends, I'll focus on the module, thank you all.
