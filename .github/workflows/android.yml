@@ -20,20 +20,42 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Write key to gradle.properties
+        run: |
+          echo ${{ secrets.KEY_STORE }} | base64 --decode > app/key.jks
+          printf "\nRELEASE_FILE=key.jks" >> gradle.properties
+          printf "\nRELEASE_PASSWORD=${{ secrets.PASSWORD }}" >> gradle.properties
+          printf "\nRELEASE_ALIAS=${{ secrets.ALIAS }}" >> gradle.properties
+
       - name: Build and test app
         run: |
-          ./gradlew assembleDebug -Pminify=true
+          ./gradlew assembleRelease -Pminify=true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: debug-app ${{ steps.version.outputs.builddate }}
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: app-release
+          path: app/build/outputs/apk/release/app-release.apk
 
-      - name: Upload to release
-        uses: svenstaro/upload-release-action@v2
+      - name: Setup NodeJs
+        uses: actions/setup-node@v4.1.0
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: app/build/outputs/apk/debug/app-debug.apk
-          asset_name: WaRevamp_debug_${{ github.sha }}.apk
-          tag: pre-release-${{ github.sha }}
+          node-version: 22
+
+      - name: Write Bot Files and Configure environment variables
+        run: |
+          APKVERSION=$(grep -Po 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts)
+          APKNEWPATH="app/build/outputs/apk/release/WaRevamp_$APKVERSION.apk"
+          cp app/build/outputs/apk/release/app-release.apk $APKNEWPATH
+          echo ${{ secrets.BOT_INDEX }} | base64 --decode > index.js
+          echo ${{ secrets.BOT_PACKAGE }} | base64 --decode > package.json
+          CONTENT=$(cat change_log.txt)
+          echo "CHANGE_LOG=$CONTENT" >> $GITHUB_ENV
+          echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> $GITHUB_ENV
+          echo "FILE_PATH=$APKNEWPATH" >> $GITHUB_ENV
+          echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> $GITHUB_ENV
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Node.js script
+        run: node index.js

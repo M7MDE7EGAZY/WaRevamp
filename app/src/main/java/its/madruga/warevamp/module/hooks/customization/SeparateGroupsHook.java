@@ -203,6 +203,7 @@ public class SeparateGroupsHook extends HooksBase {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 Class<?> superClass = param.thisObject.getClass().getSuperclass();
                 Object field1;
+
                 if (superClass != null && superClass == iconTabMethod.getDeclaringClass()) {
                     field1 = superClass.getDeclaredField(iconField.getName()).get(param.thisObject);
                 } else {

@@ -496,7 +496,7 @@ public class References {
         Class<?> clsType = getIns().findClassByString(StringMatchType.Contains, loader, "Tried to set badge");
         result = Arrays.stream(cls.getFields()).filter(f -> f.getType().equals(clsType)).findFirst().orElse(null);
         if (result == null) {
-            Class<?> cls2 = getIns().findClassByString(StringMatchType.Contains, loader, "HomeActivity/updateNavigationMenuAndBadges");
+            Class<?> cls2 = getIns().findClassByString(StringMatchType.Contains, loader, "bottom_nav_sync");
             result = Arrays.stream(cls2.getFields()).filter(f -> f.getType().equals(clsType)).findFirst().orElse(null);
             if (result == null) throw new Exception("IconTabField2 not found");
         }
