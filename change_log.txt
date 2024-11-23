@@ -1,6 +1,7 @@
 | FIXED |
 
 - Icon in the Groups Tab.
+- Fix Workflow Bugs.
 
 | ADDED |
 

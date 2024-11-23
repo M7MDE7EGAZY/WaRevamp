@@ -3,6 +3,7 @@ Continuation of the Old MdgWa.
 More information coming soon...
 
 ## Download
-[Pre-Releases](https://github.com/ItsMadruga/WaRevamp/releases)
+[Releases](https://github.com/ItsMadruga/WaRevamp/releases)
+[Pre-Releases](https://github.com/ItsMadruga/WaRevamp/actions/workflows/android.yml)
 
 
