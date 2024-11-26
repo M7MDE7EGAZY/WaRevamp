@@ -1,9 +1,12 @@
 package its.madruga.warevamp.module.references;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import org.luckypray.dexkit.DexKitBridge;
 import org.luckypray.dexkit.query.FindClass;
@@ -235,7 +238,10 @@ public class References {
         if (result != null) return result;
         Class<?> mediaQualityClass = mediaQualityClass(loader);
         result = Arrays.stream(mediaQualityClass.getDeclaredMethods()).filter(m -> m.getParameterCount() == 1 && m.getParameterTypes()[0] == int.class && m.getReturnType() == int.class).findFirst().orElse(null);
-        if (result == null) throw new Exception("videoBitrate method not found");
+        if (result == null) {
+            result = Arrays.stream(mediaQualityClass.getDeclaredMethods()).filter(m -> m.getParameterCount() == 2 && m.getParameterTypes()[1] == int.class && m.getReturnType() == int.class).findFirst().orElse(null);
+            if (result == null) throw new Exception("videoBitrate method not found");
+        }
         saveMethodPath(result, "videoBitrateMethod");
         return result;
     }
@@ -281,7 +287,7 @@ public class References {
     public synchronized static Method[] viewOnceMethods(ClassLoader loader) throws Exception {
         Method[] result = getMethods("viewOnceMethods");
         if (result != null) return result;
-        var list = new ArrayList<Method>();
+        ArrayList<Method> list = new ArrayList<Method>();
         MethodDataList methodDataList = dexKitBridge.findMethod(new FindMethod()
                 .matcher(new MethodMatcher()
                         .addUsingString("unhandled view once state", StringMatchType.Contains)));
@@ -534,6 +540,102 @@ public class References {
         result = getIns().findClassByString(StringMatchType.Contains, loader, "number format not valid: ");
         if (result == null) throw new Exception("expirationTimeMethod not found");
         saveClassPath(result, "expirationTimeClass");
+        return result;
+    }
+
+    // Pinned Limit
+
+    public synchronized static Method pinnedChatsMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("pinnedChatsMethod");
+        if (result != null) return result;
+        MethodDataList methodDataList = dexKitBridge.findMethod(new FindMethod().matcher(new MethodMatcher().addUsingNumber(3732).returnType(int.class)));
+        if(methodDataList.isEmpty()) throw new Exception("pinnedChatsMethod not found");
+        result = methodDataList.get(0).getMethodInstance(loader);
+        saveMethodPath(result, "pinnedChatsMethod");
+        return result;
+    }
+
+    public synchronized static Method pinnedHashSetMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("pinnedHashSetMethod");
+        if (result != null) return result;
+        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "SELECT jid, pinned_time FROM settings");
+        if (cls == null) throw new Exception("pinnedClassList not found");
+        result = Arrays.stream(cls.getDeclaredMethods()).filter(m -> m.getReturnType().equals(Set.class)).findFirst().orElse(null);
+        if (result == null) throw new Exception("pinnedHashSetMethod not found");
+        saveMethodPath(result, "pinnedHashSetMethod");
+        return result;
+    }
+
+    public synchronized static Method pinnedLimitMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("pinnedLimitMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "count_progress");
+        if (result == null) throw new Exception("pinnedLimitMethod not found");
+        saveMethodPath(result, "pinnedLimitMethod");
+        return result;
+    }
+
+    // Hide Read
+
+    public synchronized static Method hideReadJobMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("hideReadJobMethod");
+        if (result != null) return result;
+        ClassData clsData = dexKitBridge.getClassData(XposedHelpers.findClass("com.whatsapp.jobqueue.job.SendReadReceiptJob", loader));
+        MethodDataList methodDataList = clsData.findMethod(new FindMethod().matcher(new MethodMatcher().addUsingString("receipt", StringMatchType.Equals)));
+        if (methodDataList.isEmpty()) {
+            methodDataList = clsData.getSuperClass().findMethod(new FindMethod().matcher(new MethodMatcher().addUsingString("receipt", StringMatchType.Equals)));
+        }
+        if (methodDataList.isEmpty()) throw new Exception("hideReadJobMethod not found");
+        result = methodDataList.get(0).getMethodInstance(loader);
+        saveMethodPath(result, "hideReadJobMethod");
+        return result;
+    }
+
+    public synchronized static Method hideViewMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("hideViewMethod");
+        if (result != null) return result;
+        MethodDataList methodDataList = dexKitBridge.findMethod(new FindMethod().matcher(new MethodMatcher()
+                .addUsingString("privacy_token", StringMatchType.Contains)
+                .addUsingString("recipient", StringMatchType.Contains)
+                .addUsingString("false", StringMatchType.Contains)
+                .paramCount(1,10)
+        ));
+        if (methodDataList.isEmpty()) throw new Exception("hideViewMethodList not found");
+        result = methodDataList.get(0).getMethodInstance(loader);
+        saveMethodPath(result, "hideViewMethod");
+        return result;
+    }
+
+    public synchronized static Method hideViewInChatMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("hideViewInChatMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "ReadReceipts/PrivacyTokenDecisionNotComputed");
+        if (result == null) throw new Exception("hideViewInChatMethod not found");
+        saveMethodPath(result, "hideViewInChatMethod");
+        return result;
+    }
+
+    public synchronized static Method senderPlayedMethod(ClassLoader loader) throws  Exception {
+        Method result = getMethod("senderPlayedMethod");
+        if (result != null) return result;
+        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "sendmethods/sendClearDirty");
+        if (cls == null) throw new Exception("sendPlayedClass not found");
+        Class<?> fMessage = FMessageClass(loader);
+        result = ReferencesUtils.findMethodUsingFilter(cls, m -> m.getParameterCount() == 1 && fMessage.isAssignableFrom(m.getParameterTypes()[0]));
+        if (result == null) throw new Exception("SenderPlayed method not found");
+        saveMethodPath(result, "senderPlayedMethod");
+        return result;
+    }
+
+    // Hide Archived Chats
+
+    public synchronized static Method archivedHideChatsMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("archivedHideChatsMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "archive/set-content-indicator-to-empty");
+        if (result == null) throw new Exception("archivedHideChatsMethod not found");
+        result = result.getDeclaringClass().getMethod("setVisibility", boolean.class);
+        saveMethodPath(result, "archivedHideChatsMethod");
         return result;
     }
 

@@ -5,5 +5,13 @@
             android:title="@string/separate_groups"
             android:summary="@string/separate_groups_sum"
             android:key="separateGroups" />
+        <rikka.material.preference.MaterialSwitchPreference
+            android:title="@string/disable_pinned_limit"
+            android:summary="@string/disable_pinned_limit_sum"
+            android:key="pinnedLimit"/>
+        <rikka.material.preference.MaterialSwitchPreference
+                android:title="@string/hide_archived_chat"
+                android:summary="@string/hide_archived_chat_sum"
+                android:key="hide_archived" />
 
 </androidx.preference.PreferenceScreen>

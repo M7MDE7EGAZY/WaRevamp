@@ -30,5 +30,9 @@
             android:title="@string/hidereceipt"
             android:summary="@string/hidereceipt_sum"
             android:key="hideReceipt"/>
+        <rikka.material.preference.MaterialSwitchPreference
+            android:title="@string/hide_read"
+            android:summary="@string/hide_read_sum"
+            android:key="hide_read" />
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

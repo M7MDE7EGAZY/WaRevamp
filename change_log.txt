@@ -1,5 +1,9 @@
 | FIXED |
 
-- Module did not activate
+- Videos in HD Quality
 
 | ADDED |
+
+- Disable Pinned Chats Limit
+- Hide Read Message and Statuses
+- Hide Archived Chats

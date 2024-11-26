@@ -55,4 +55,10 @@
     <string name="clean_database_msg">Do you want to continue?\n\nThis action is irreversible.</string>
     <string name="clean_database_ok">Database deleted successfully.</string>
     <string name="about">About App</string>
+    <string name="disable_pinned_limit">Disable Pinned Chats Limit</string>
+    <string name="disable_pinned_limit_sum">Disable limit of 3 pinned chats</string>
+    <string name="hide_archived_chat">Hide Archived Chats</string>
+    <string name="hide_archived_chat_sum">Hide archived chats, to access hold on the \"WhatsApp\" title in the header on Home Screen</string>
+    <string name="hide_read">Hide Blue Ticks</string>
+    <string name="hide_read_sum">View messages and statuses on the chat screen without users knowing</string>
 </resources>

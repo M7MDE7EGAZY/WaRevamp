@@ -19,9 +19,12 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import its.madruga.warevamp.module.core.WppCallback;
+import its.madruga.warevamp.module.hooks.others.HideArchivedChatsHook;
+import its.madruga.warevamp.module.hooks.others.PinnedLimit;
 import its.madruga.warevamp.module.hooks.customization.SeparateGroupsHook;
 import its.madruga.warevamp.module.hooks.others.MenuHook;
 import its.madruga.warevamp.module.hooks.privacy.DndModeHook;
+import its.madruga.warevamp.module.hooks.privacy.HideReadHook;
 import its.madruga.warevamp.module.hooks.privacy.HideReceiptHook;
 import its.madruga.warevamp.module.references.References;
 import its.madruga.warevamp.module.hooks.media.MediaQualityHook;
@@ -82,7 +85,10 @@ public class HooksLoader {
                 MenuHook.class,
                 DndModeHook.class,
                 HideReceiptHook.class,
-                SeparateGroupsHook.class
+                SeparateGroupsHook.class,
+                PinnedLimit.class,
+                HideReadHook.class,
+                HideArchivedChatsHook.class
         };
 
         for (var c : classes) {
