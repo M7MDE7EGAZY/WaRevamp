@@ -3,8 +3,6 @@ name: Android CI
 on:
   push:
     branches: [ "master" ]
-    paths:
-      - '!update.json'
 jobs:
   build:
     permissions: write-all
