@@ -1,5 +1,6 @@
 {
   "version": "0.0.4",
   "date": "",
-  "link": "https://github.com/Xposed-Modules-Repo/its.madruga.warevamp/releases/download/1-0.0.3/WaRevamp_0.0.3.apk"
+  "link": "https://github.com/Xposed-Modules-Repo/its.madruga.warevamp/releases/download/1-0.0.3/WaRevamp_0.0.3.apk",
+  "changelog": "test changelog\nTest\nchange\nlog"
 }
