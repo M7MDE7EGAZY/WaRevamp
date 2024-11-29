@@ -3,6 +3,9 @@ name: Android CI
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - '!update.json'
+      - '!.github/workflows/*.yml'
 jobs:
   build:
     permissions: write-all
