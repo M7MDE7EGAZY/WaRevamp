@@ -105,6 +105,11 @@ public class InfoCard extends MaterialCardView {
         cardSubTitle.setVisibility(VISIBLE);
     }
 
+    public void setCardBackground(int color) {
+        MaterialCardView card = findViewById(R.id.card_info_container);
+        card.setCardBackgroundColor(color);
+    }
+
     public TextView getTitleView() {
         return findViewById(R.id.card_info_title);
     }
@@ -121,7 +126,4 @@ public class InfoCard extends MaterialCardView {
         return findViewById(R.id.card_info_waversion);
     }
 
-    public LinearLayout getCardContainer() {
-        return findViewById(R.id.card_info_layout);
-    }
 }

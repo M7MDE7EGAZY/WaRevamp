@@ -1,9 +1,7 @@
 | FIXED |
 
-- Videos in HD Quality
+- Missing strings
 
 | ADDED |
 
-- Disable Pinned Chats Limit
-- Hide Read Message and Statuses
-- Hide Archived Chats
+- Module update system

@@ -13,7 +13,7 @@ android {
         //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
-        versionName = "0.0.3"
+        versionName = "0.0.4"
     }
 
     signingConfigs {
