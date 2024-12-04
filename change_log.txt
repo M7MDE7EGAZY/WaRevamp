@@ -1,7 +1,5 @@
-| FIXED |
-
-- Missing strings
-
 | ADDED |
 
-- Module update system
+- Download Status Button
+- Download View Once Button
+- Disable Secure Flags Button

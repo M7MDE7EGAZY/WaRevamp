@@ -60,9 +60,17 @@
     <string name="clean_database_ok">Database deleted successfully.</string>
     <string name="about">About App</string>
     <string name="disable_pinned_limit">Disable Pinned Chats Limit</string>
-    <string name="disable_pinned_limit_sum">Disable limit of 3 pinned chats</string>
+    <string name="disable_pinned_limit_sum">Disable limit of 3 pinned chats.</string>
     <string name="hide_archived_chat">Hide Archived Chats</string>
-    <string name="hide_archived_chat_sum">Hide archived chats, to access hold on the \"WhatsApp\" title in the header on Home Screen</string>
+    <string name="hide_archived_chat_sum">Hide archived chats, to access hold on the \"WhatsApp\" title in the header on Home Screen.</string>
     <string name="hide_read">Hide Blue Ticks</string>
-    <string name="hide_read_sum">View messages and statuses on the chat screen without users knowing</string>
+    <string name="hide_read_sum">View messages and statuses on the chat screen without users knowing.</string>
+    <string name="quality_media">Quality Options</string>
+    <string name="download_media">Download Options</string>
+    <string name="download_status">Download Status</string>
+    <string name="download_status_sum">Create a button to download people\'s statuses.</string>
+    <string name="download_viewonce">Download View Once</string>
+    <string name="download_viewonce_sum">Create a view once download button.</string>
+    <string name="disable_secure_flags">Remove FLAG_SECURE from Window</string>
+    <string name="disable_secure_flags_sum">This function removes the FLAG_SECURE from app windows, allowing unrestricted screenshot and screen recording capabilities.</string>
 </resources>

@@ -3,11 +3,15 @@ package its.madruga.warevamp.module.references;
 import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import its.madruga.warevamp.module.core.WppUtils;
+
 import org.luckypray.dexkit.DexKitBridge;
 import org.luckypray.dexkit.query.FindClass;
 import org.luckypray.dexkit.query.FindMethod;
@@ -16,8 +20,10 @@ import org.luckypray.dexkit.query.matchers.ClassMatcher;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
 import org.luckypray.dexkit.result.ClassData;
 import org.luckypray.dexkit.result.ClassDataList;
+import org.luckypray.dexkit.result.FieldData;
 import org.luckypray.dexkit.result.MethodData;
 import org.luckypray.dexkit.result.MethodDataList;
+import org.luckypray.dexkit.result.UsingFieldData;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -138,6 +144,24 @@ public class References {
         return result;
     }
 
+    public synchronized static Field mediaTypeField(ClassLoader loader) throws Exception {
+        Field result = getField("mediaTypeField");
+        if (result != null) return result;
+        MethodDataList aux = dexKitBridge.findMethod(FindMethod.create().matcher(MethodMatcher.create().addUsingString("conversation/refresh")));
+        if (aux.isEmpty()) throw new Exception("mediaTypeField aux method not found");
+        ClassData fClass = dexKitBridge.getClassData(FMessageClass(loader));
+        List<UsingFieldData> usingFieldData = aux.get(0).getUsingFields();
+        for (UsingFieldData field : usingFieldData) {
+            FieldData f = field.getField();
+            if (f.getDeclaredClass().equals(fClass) && f.getType().getName().equals(int.class.getName())) {
+                result = f.getFieldInstance(loader);
+            }
+        }
+        if (result == null) throw new Exception("MediaType field not found");
+        saveFieldPath(result, "mediaTypeField");
+        return result;
+    }
+
     public synchronized static Method newMessageMethod(ClassLoader loader) throws Exception {
         Method result = getMethod("newMessageMethod");
         if (result != null) return result;
@@ -163,6 +187,15 @@ public class References {
         if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
         result = methodDataList.get(0).getMethodInstance(loader);
         saveMethodPath(result, "newMessageWithMediaMethod");
+        return result;
+    }
+
+    public synchronized static Class<?> mediaMessageClass(ClassLoader loader) throws Exception {
+        Class<?> result = getClazz("mediaMessageClass");
+        if (result != null) return result;
+        result = getIns().findClassByString(StringMatchType.Contains, loader, "static.whatsapp.net/downloadable?category=PSA");
+        if (result == null) throw new Exception("mediaMessageClass not found");
+        saveClassPath(result, "mediaMessageClass");
         return result;
     }
 
@@ -636,6 +669,72 @@ public class References {
         if (result == null) throw new Exception("archivedHideChatsMethod not found");
         result = result.getDeclaringClass().getMethod("setVisibility", boolean.class);
         saveMethodPath(result, "archivedHideChatsMethod");
+        return result;
+    }
+
+    // Download Status
+
+    public synchronized static Class<?> menuManagerClass(ClassLoader loader) throws Exception {
+        Class<?> result = getClazz("menuManagerClass");
+        if (result != null) return result;
+        Method[] results = getIns().findMethodsByString(StringMatchType.Contains, loader, "MenuPopupHelper cannot be used without an anchor");
+        for (var method : results) {
+            if (method.getReturnType() == void.class) {
+                saveClassPath(method.getDeclaringClass(), "menuManagerClass");
+                return method.getDeclaringClass();
+            }
+        }
+        throw new Exception("MenuManager class not found");
+    }
+
+    public synchronized static Method setPageActiveMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("setPageActiveMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "playbackFragment/setPageActive no-messages");
+        if (result == null) throw new Exception("setPageActiveMethod not found");
+        saveMethodPath(result, "setPageActiveMethod");
+        return result;
+    }
+
+    public synchronized static Method  menuStatusClickMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("menuStatusClickMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "chatSettingsStore", "systemFeatures");
+        if (result == null) throw new Exception("menuStatusClickMethod not found");
+        saveMethodPath(result, "menuStatusClickMethod");
+        return result;
+    }
+
+    // Download View Once
+
+    public synchronized static Method menuViewOnceManagerMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("menuViewOnceManagerMethod");
+        if (result != null) return result;
+        Class<?> mediaView = loader.loadClass("com.whatsapp.mediaview.MediaViewFragment");
+        for(Method method : mediaView.getDeclaredMethods()) {
+            if(method.getParameterCount() == 2 && method.getParameterTypes()[0] == Menu.class && method.getParameterTypes()[1] == MenuInflater.class) {
+                result = method;
+            }
+        }
+        if (result == null) throw new Exception("menuViewOnceManagerMethod not found");
+        saveMethodPath(result, "menuViewOnceManagerMethod");
+        return result;
+    }
+
+    public synchronized static Field menuStyleField(ClassLoader loader) throws Exception {
+        Field result = getField("menuStyleField");
+        if (result != null) return result;
+        Method method = getIns().findMethodByString(StringMatchType.Contains, loader, "mediaViewFragment/cannot save partially");
+        MethodData methodData = dexKitBridge.getMethodData(method);
+        if (methodData == null) throw new Exception("menuStyleField data not found");
+        for (var f : methodData.getUsingFields()) {
+            Field field = f.getField().getFieldInstance(loader);
+            if (field.getType().equals(int.class) && field.getDeclaringClass() == method.getDeclaringClass()) {
+                result = field;
+            }
+        }
+        if (result == null) throw new Exception("menuStyleField not found");
+        saveFieldPath(result, "menuStyleField");
         return result;
     }
 

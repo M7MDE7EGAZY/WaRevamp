@@ -4,6 +4,10 @@
         android:title="@string/novotema"
         android:summary="@string/novotema_sum"
         android:key="novoTema"/>
+    <rikka.material.preference.MaterialSwitchPreference
+        android:title="@string/disable_secure_flags"
+        android:summary="@string/disable_secure_flags_sum"
+        android:key="disable_secure_flags"/>
     <PreferenceCategory
         android:title="@string/clean_database">
     <Preference

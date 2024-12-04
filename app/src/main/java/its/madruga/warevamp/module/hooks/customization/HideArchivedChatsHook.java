@@ -1,4 +1,4 @@
-package its.madruga.warevamp.module.hooks.others;
+package its.madruga.warevamp.module.hooks.customization;
 
 import static its.madruga.warevamp.module.references.References.archivedHideChatsMethod;
 

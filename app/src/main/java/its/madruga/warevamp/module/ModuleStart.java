@@ -15,6 +15,7 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import its.madruga.warevamp.BuildConfig;
 import its.madruga.warevamp.module.hooks.core.HooksLoader;
+import its.madruga.warevamp.module.hooks.media.DisableFlagSecureHook;
 import its.madruga.warevamp.module.references.ModuleResources;
 import its.madruga.warevamp.core.Utils;
 import its.madruga.warevamp.core.XposedChecker;
@@ -45,6 +46,8 @@ public class ModuleStart implements IXposedHookLoadPackage, IXposedHookInitPacka
             HooksLoader.initialize(getPref(), classLoader, sourcePath);
         };
 
+        DisableFlagSecureHook.doHook(lpparam, getPref());
+
     }
 
     @Override
@@ -71,7 +74,7 @@ public class ModuleStart implements IXposedHookLoadPackage, IXposedHookInitPacka
         }
 
         for (Field field : ModuleResources.layout.class.getFields()) {
-            int resId = res.getIdentifier(field.getName(), "string", BuildConfig.APPLICATION_ID);
+            int resId = res.getIdentifier(field.getName(), "layout", BuildConfig.APPLICATION_ID);
             int addedResId = resparam.res.addResource(res, resId);
             field.set(null, addedResId);
         }

@@ -4,6 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
+      - '**'
       - '!update.json'
       - '!.github/workflows/*.yml'
 jobs:

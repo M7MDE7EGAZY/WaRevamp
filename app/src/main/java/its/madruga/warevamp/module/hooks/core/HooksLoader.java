@@ -19,7 +19,9 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import its.madruga.warevamp.module.core.WppCallback;
-import its.madruga.warevamp.module.hooks.others.HideArchivedChatsHook;
+import its.madruga.warevamp.module.hooks.customization.HideArchivedChatsHook;
+import its.madruga.warevamp.module.hooks.media.DownloadStatusHook;
+import its.madruga.warevamp.module.hooks.media.DownloadViewOnceHook;
 import its.madruga.warevamp.module.hooks.others.PinnedLimit;
 import its.madruga.warevamp.module.hooks.customization.SeparateGroupsHook;
 import its.madruga.warevamp.module.hooks.others.MenuHook;
@@ -88,7 +90,9 @@ public class HooksLoader {
                 SeparateGroupsHook.class,
                 PinnedLimit.class,
                 HideReadHook.class,
-                HideArchivedChatsHook.class
+                HideArchivedChatsHook.class,
+                DownloadStatusHook.class,
+                DownloadViewOnceHook.class
         };
 
         for (var c : classes) {

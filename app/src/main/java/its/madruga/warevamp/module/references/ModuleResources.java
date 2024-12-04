@@ -5,6 +5,7 @@ public class ModuleResources {
     }
 
     public static class drawable {
+        public static int download_icon;
     }
 
     public static class string {
@@ -13,5 +14,7 @@ public class ModuleResources {
         public static int dnd_mode_description;
         public static int dnd_mode_title;
         public static int clean_database_ok;
+        public static int download_status;
+        public static int download_viewonce;
     }
 }
