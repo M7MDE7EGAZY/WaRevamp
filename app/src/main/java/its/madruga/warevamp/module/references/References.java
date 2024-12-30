@@ -743,6 +743,28 @@ public class References {
         return result;
     }
 
+    // Hide Typing and Recording
+
+    public synchronized static Method typingAndRecordingMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("typingAndRecordingMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "HandleMeComposing/sendComposing; toJid=");
+        if (result == null) throw new Exception("typingAndRecordingMethod not found");
+        saveMethodPath(result, "typingAndRecordingMethod");
+        return result;
+    }
+
+    // Freeze Last Seen
+
+    public synchronized static Method freezeLastSeenMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("freezeLastSeenMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "presencestatemanager/setAvailable/new-state:");
+        if (result == null) throw new Exception("freezeLastSeenMethod not found");
+        saveMethodPath(result, "freezeLastSeenMethod");
+        return result;
+    }
+
     public static void start() {
         ins = new References();
     }
