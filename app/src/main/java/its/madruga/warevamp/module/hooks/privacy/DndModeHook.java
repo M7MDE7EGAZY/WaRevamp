@@ -24,10 +24,16 @@ public class DndModeHook extends HooksBase {
     @Override
     public void doHook() throws Exception {
         super.doHook();
-        boolean dndMode = prefs.getBoolean("dnd_Mode", false);
+        boolean dndMode = prefs.getBoolean("dndMode", false);
 
-        if(!dndMode) return;
+        if(dndMode) {
+            XposedBridge.hookMethod(dndModeMethod(loader), new XC_MethodReplacement() {
+                @Override
+                protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                    return null;
+                }
+            });
+        }
 
-        XposedBridge.hookMethod(dndModeMethod(loader), XC_MethodReplacement.DO_NOTHING);
     }
 }

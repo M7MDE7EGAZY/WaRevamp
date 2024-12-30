@@ -37,7 +37,7 @@ public class MediaQualityHook extends HooksBase {
             XposedBridge.hookMethod(videoBitrateMethod(loader), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    param.setResult(40000);
+                    param.setResult(1600000);
                 }
             });
             XposedBridge.hookMethod(videoGifBitrateMethod(loader), new XC_MethodReplacement() {

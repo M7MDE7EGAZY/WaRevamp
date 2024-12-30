@@ -180,12 +180,17 @@ public class References {
         Method result = getMethod("newMessageWithMediaMethod");
         if (result != null) return result;
         ClassData fMessageData = dexKitBridge.getClassData(FMessageClass(loader));
-        MethodDataList methodDataList = fMessageData.findMethod(new FindMethod()
+        MethodDataList methodDataList = dexKitBridge.findMethod(new FindMethod()
                 .matcher(new MethodMatcher()
-                        .addUsingNumber(0x200000)
-                        .returnType(String.class)));
-        if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
-        result = methodDataList.get(0).getMethodInstance(loader);
+                        .addUsingString("Quoted message chatJid is not specified, parentJid is not a UserJid.", StringMatchType.Contains)
+                ));
+        for (MethodData m : methodDataList) {
+            MethodDataList m2 = m.getInvokes();
+            for (MethodData n : m2) {
+                if(n.getClassName().equals(fMessageData.getName()) && n.getReturnType().getName().equals(String.class.getName())) result = n.getMethodInstance(loader);
+            }
+        }
+        if (result == null) throw new Exception("newMessageWithMediaMethod not found");
         saveMethodPath(result, "newMessageWithMediaMethod");
         return result;
     }
@@ -591,7 +596,7 @@ public class References {
     public synchronized static Method pinnedHashSetMethod(ClassLoader loader) throws Exception {
         Method result = getMethod("pinnedHashSetMethod");
         if (result != null) return result;
-        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "SELECT jid, pinned_time FROM settings");
+        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "getPinnedJids/QUERY");
         if (cls == null) throw new Exception("pinnedClassList not found");
         result = Arrays.stream(cls.getDeclaredMethods()).filter(m -> m.getReturnType().equals(Set.class)).findFirst().orElse(null);
         if (result == null) throw new Exception("pinnedHashSetMethod not found");
