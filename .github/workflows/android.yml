@@ -36,13 +36,6 @@ jobs:
         run: |
           ./gradlew assembleRelease
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        id: upload
-        with:
-          name: app-release
-          path: app/build/outputs/apk/release/app-release.apk
-
       - name: Setup NodeJs
         uses: actions/setup-node@v4.1.0
         with:
@@ -65,3 +58,10 @@ jobs:
 
       - name: Run Node.js script
         run: node index.js
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: app-release
+          path: app/build/outputs/apk/release/app-release.apk
