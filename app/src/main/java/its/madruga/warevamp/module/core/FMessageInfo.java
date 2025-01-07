@@ -65,19 +65,25 @@ public class FMessageInfo {
         try {
             return mediaMessageClass.isInstance(messageObject);
         } catch (Exception e) {
+            XposedBridge.log(e.getMessage() + " | " + (mediaMessageClass == null ? "MediaMessageClass" : "MessageObject"));
             return false;
         }
     }
 
     public File getMediaFile() {
         try {
-            if (!isMediaFile()) return null;
+            if (!isMediaFile()) {
+                XposedBridge.log("Not Media file");
+                return null;
+            }
             for (var field : mediaMessageClass.getDeclaredFields()) {
                 if (field.getType().isPrimitive()) continue;
                 var fileField = ReferencesUtils.getFieldByType(field.getType(), File.class);
                 if (fileField != null) {
                     var mediaFile = ReferencesUtils.getObjectField(field, messageObject);
                     return (File) fileField.get(mediaFile);
+                } else {
+                    XposedBridge.log("File field is null!!");
                 }
             }
         } catch (Exception e) {

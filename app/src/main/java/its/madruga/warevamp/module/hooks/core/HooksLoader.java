@@ -26,8 +26,10 @@ import its.madruga.warevamp.module.hooks.others.PinnedLimit;
 import its.madruga.warevamp.module.hooks.customization.SeparateGroupsHook;
 import its.madruga.warevamp.module.hooks.others.MenuHook;
 import its.madruga.warevamp.module.hooks.privacy.DndModeHook;
+import its.madruga.warevamp.module.hooks.privacy.FreezeLastSeenHook;
 import its.madruga.warevamp.module.hooks.privacy.HideReadHook;
 import its.madruga.warevamp.module.hooks.privacy.HideReceiptHook;
+import its.madruga.warevamp.module.hooks.privacy.HideTypingRecordingHook;
 import its.madruga.warevamp.module.references.References;
 import its.madruga.warevamp.module.hooks.media.MediaQualityHook;
 import its.madruga.warevamp.module.hooks.others.OthersHook;
@@ -92,7 +94,9 @@ public class HooksLoader {
                 HideReadHook.class,
                 HideArchivedChatsHook.class,
                 DownloadStatusHook.class,
-                DownloadViewOnceHook.class
+                DownloadViewOnceHook.class,
+                HideTypingRecordingHook.class,
+                FreezeLastSeenHook.class
         };
 
         for (var c : classes) {

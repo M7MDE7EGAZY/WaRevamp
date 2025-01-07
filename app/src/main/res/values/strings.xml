@@ -12,6 +12,7 @@
     <string name="module_update_summary">Click for more information.</string>
     <string name="module_update">Update</string>
     <string name="message_deleted">Message Deleted</string>
+    <string name="privacy_features">Privacy Features</string>
     <string name="perso">Customization</string>
     <string name="perso_sum">Home Screen • Chat Screen</string>
     <string name="general">General</string>
@@ -73,4 +74,10 @@
     <string name="download_viewonce_sum">Create a view once download button.</string>
     <string name="disable_secure_flags">Remove FLAG_SECURE from Window</string>
     <string name="disable_secure_flags_sum">This function removes the FLAG_SECURE from app windows, allowing unrestricted screenshot and screen recording capabilities.</string>
+    <string name="hide_recording">Hide Recording Audio</string>
+    <string name="hide_recording_sum">When active, the person cannot see that you are recording audio.</string>
+    <string name="hide_typing">Hide Typing</string>
+    <string name="hide_typing_sum">When active, the person cannot see that you are typing.</string>
+    <string name="freeze_last_seen">Freeze last seen</string>
+    <string name="freeze_last_seen_sum">When it\'is enabled, you\'ll don\'t see any presence updates from other users, like typing, recording, online.</string>
 </resources>

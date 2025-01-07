@@ -170,7 +170,13 @@ public class References {
                 .matcher(new MethodMatcher()
                         .addUsingString("\n")
                         .returnType(String.class)));
-        if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
+        if (methodDataList.isEmpty()) {
+            methodDataList = fMessageData.findMethod(new FindMethod()
+                    .matcher(new MethodMatcher()
+                            .paramCount(0)
+                            .returnType(String.class)));
+            if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
+        }
         result = methodDataList.get(0).getMethodInstance(loader);
         saveMethodPath(result, "newMessageMethod");
         return result;
@@ -180,12 +186,17 @@ public class References {
         Method result = getMethod("newMessageWithMediaMethod");
         if (result != null) return result;
         ClassData fMessageData = dexKitBridge.getClassData(FMessageClass(loader));
-        MethodDataList methodDataList = fMessageData.findMethod(new FindMethod()
+        MethodDataList methodDataList = dexKitBridge.findMethod(new FindMethod()
                 .matcher(new MethodMatcher()
-                        .addUsingNumber(0x200000)
-                        .returnType(String.class)));
-        if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
-        result = methodDataList.get(0).getMethodInstance(loader);
+                        .addUsingString("Quoted message chatJid is not specified, parentJid is not a UserJid.", StringMatchType.Contains)
+                ));
+        for (MethodData m : methodDataList) {
+            MethodDataList m2 = m.getInvokes();
+            for (MethodData n : m2) {
+                if(n.getClassName().equals(fMessageData.getName()) && n.getReturnType().getName().equals(String.class.getName())) result = n.getMethodInstance(loader);
+            }
+        }
+        if (result == null) throw new Exception("newMessageWithMediaMethod not found");
         saveMethodPath(result, "newMessageWithMediaMethod");
         return result;
     }
@@ -591,7 +602,7 @@ public class References {
     public synchronized static Method pinnedHashSetMethod(ClassLoader loader) throws Exception {
         Method result = getMethod("pinnedHashSetMethod");
         if (result != null) return result;
-        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "SELECT jid, pinned_time FROM settings");
+        Class<?> cls = getIns().findClassByString(StringMatchType.Contains, loader, "getPinnedJids/QUERY");
         if (cls == null) throw new Exception("pinnedClassList not found");
         result = Arrays.stream(cls.getDeclaredMethods()).filter(m -> m.getReturnType().equals(Set.class)).findFirst().orElse(null);
         if (result == null) throw new Exception("pinnedHashSetMethod not found");
@@ -699,7 +710,7 @@ public class References {
     public synchronized static Method  menuStatusClickMethod(ClassLoader loader) throws Exception {
         Method result = getMethod("menuStatusClickMethod");
         if (result != null) return result;
-        result = getIns().findMethodByString(StringMatchType.Contains, loader, "chatSettingsStore", "systemFeatures");
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "biz_block_header_chat", "Required value was null.");
         if (result == null) throw new Exception("menuStatusClickMethod not found");
         saveMethodPath(result, "menuStatusClickMethod");
         return result;
@@ -735,6 +746,28 @@ public class References {
         }
         if (result == null) throw new Exception("menuStyleField not found");
         saveFieldPath(result, "menuStyleField");
+        return result;
+    }
+
+    // Hide Typing and Recording
+
+    public synchronized static Method typingAndRecordingMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("typingAndRecordingMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "HandleMeComposing/sendComposing; toJid=");
+        if (result == null) throw new Exception("typingAndRecordingMethod not found");
+        saveMethodPath(result, "typingAndRecordingMethod");
+        return result;
+    }
+
+    // Freeze Last Seen
+
+    public synchronized static Method freezeLastSeenMethod(ClassLoader loader) throws Exception {
+        Method result = getMethod("freezeLastSeenMethod");
+        if (result != null) return result;
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "presencestatemanager/setAvailable/new-state:");
+        if (result == null) throw new Exception("freezeLastSeenMethod not found");
+        saveMethodPath(result, "freezeLastSeenMethod");
         return result;
     }
 

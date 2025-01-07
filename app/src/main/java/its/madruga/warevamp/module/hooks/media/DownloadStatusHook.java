@@ -4,7 +4,6 @@ import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
 import static its.madruga.warevamp.module.references.ModuleResources.string.download_status;
 import static its.madruga.warevamp.module.references.References.menuManagerClass;
 import static its.madruga.warevamp.module.references.References.menuStatusClickMethod;
-import static its.madruga.warevamp.module.references.References.setPageActiveMethod;
 
 import android.media.MediaScannerConnection;
 import android.os.Environment;
