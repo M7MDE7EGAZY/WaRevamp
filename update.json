@@ -1,6 +1,6 @@
 {
-  "version": "0.0.5",
-  "date": "04-12-2024",
-  "link": "https://t.me/warevampmodule/75",
-  "changelog": "| ADDED |\n\n- Download Status Button\n- Download View Once Button\n- Disable Secure Flags Button"
+  "version": "0.0.6",
+  "date": "17-01-2025",
+  "link": "https://t.me/warevampmodule/81",
+  "changelog": "| ADDED |\n\n- Hide Typing and Recording\n- Freeze last seen\n\n| FIXED |\n\n- Download View Once and Status\n- Others minor errors\n\n| NOTICE |\n\nUntil the moment of this update, the module was able to support version 2.25.1.14 of WhatsApp without presenting errors, any problem report in our group"
 }
