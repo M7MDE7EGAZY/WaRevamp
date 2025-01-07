@@ -1,10 +1,6 @@
 package its.madruga.warevamp.core;
 
 
-import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
-
-import android.util.Log;
-
 import its.madruga.warevamp.App;
 
 public class Utils {
@@ -18,13 +14,5 @@ public class Utils {
         } catch (Exception ignored) {
         }
         return false;
-    }
-
-    public static int getResourceId(String name, String type) {
-        int id = App.getInstance().getResources().getIdentifier(name, type, App.getInstance().getPackageName());
-        if (id == 0) {
-            Log.e("WaRevamp", "Resource not found: " + name);
-        }
-        return id;
     }
 }

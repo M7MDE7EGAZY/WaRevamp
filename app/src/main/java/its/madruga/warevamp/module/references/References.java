@@ -170,7 +170,13 @@ public class References {
                 .matcher(new MethodMatcher()
                         .addUsingString("\n")
                         .returnType(String.class)));
-        if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
+        if (methodDataList.isEmpty()) {
+            methodDataList = fMessageData.findMethod(new FindMethod()
+                    .matcher(new MethodMatcher()
+                            .paramCount(0)
+                            .returnType(String.class)));
+            if (methodDataList.isEmpty()) throw new Exception("FMessage method not found");
+        }
         result = methodDataList.get(0).getMethodInstance(loader);
         saveMethodPath(result, "newMessageMethod");
         return result;
@@ -704,7 +710,7 @@ public class References {
     public synchronized static Method  menuStatusClickMethod(ClassLoader loader) throws Exception {
         Method result = getMethod("menuStatusClickMethod");
         if (result != null) return result;
-        result = getIns().findMethodByString(StringMatchType.Contains, loader, "chatSettingsStore", "systemFeatures");
+        result = getIns().findMethodByString(StringMatchType.Contains, loader, "biz_block_header_chat", "Required value was null.");
         if (result == null) throw new Exception("menuStatusClickMethod not found");
         saveMethodPath(result, "menuStatusClickMethod");
         return result;
