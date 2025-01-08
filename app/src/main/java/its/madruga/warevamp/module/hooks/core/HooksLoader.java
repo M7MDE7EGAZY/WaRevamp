@@ -1,6 +1,5 @@
 package its.madruga.warevamp.module.hooks.core;
 
-import static its.madruga.warevamp.core.Receivers.getReceivers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,6 +17,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import its.madruga.warevamp.core.broadcast.Receivers;
 import its.madruga.warevamp.module.core.WppCallback;
 import its.madruga.warevamp.module.hooks.customization.HideArchivedChatsHook;
 import its.madruga.warevamp.module.hooks.media.DownloadStatusHook;
@@ -59,7 +59,7 @@ public class HooksLoader {
                 ReferencesCache.init(mApp, loader);
                 References.start();
                 plugins(loader, pref);
-                getReceivers();
+                Receivers.registerReceivers();
             }
         });
 

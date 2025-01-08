@@ -44,7 +44,7 @@ public class ModuleStart implements IXposedHookLoadPackage, IXposedHookInitPacka
 
         if (packageName.equals(Utils.WHATSAPP_PACKAGE) || packageName.equals(Utils.WHATSAPP_WEB_PACKAGE)) {
             HooksLoader.initialize(getPref(), classLoader, sourcePath);
-        };
+        }
 
         DisableFlagSecureHook.doHook(lpparam, getPref());
 

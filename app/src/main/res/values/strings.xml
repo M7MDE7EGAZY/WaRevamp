@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">Wa Revamp</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:keep="true">Wa Revamp</string>
     <string name="app_desc">An Xposed module to customize your WhatsApp.</string>
     <string name="whatsapp_version">WhatsApp Version:</string>
     <string name="module_version">Module Version:</string>

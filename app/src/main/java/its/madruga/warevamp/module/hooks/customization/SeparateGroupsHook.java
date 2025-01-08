@@ -10,7 +10,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import its.madruga.warevamp.module.core.db.MessageStore;
+import its.madruga.warevamp.module.core.databases.MsgstoreDatabase;
 import its.madruga.warevamp.module.hooks.core.HooksBase;
 import org.jetbrains.annotations.NotNull;
 
@@ -154,7 +154,7 @@ public class SeparateGroupsHook extends HooksBase {
                     int chatCount = 0;
                     int groupCount = 0;
                     synchronized (SeparateGroupsHook.class) {
-                        var db = MessageStore.getInstance().getDatabase();
+                        var db = MsgstoreDatabase.getInstance().getDatabase();
                         var sql = "SELECT * FROM chat WHERE unseen_message_count != 0";
                         var cursor = db.rawQuery(sql, null);
                         while (cursor.moveToNext()) {
