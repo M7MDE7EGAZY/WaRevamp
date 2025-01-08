@@ -1,6 +1,6 @@
 package its.madruga.warevamp.module.core;
 
-import static its.madruga.warevamp.core.broadcast.receivers.WhatsAppReceiver.restartWhatsapp;
+import static its.madruga.warevamp.broadcast.receivers.WhatsAppReceiver.restartWhatsapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;

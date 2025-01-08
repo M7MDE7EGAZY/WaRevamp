@@ -1,4 +1,4 @@
-package its.madruga.warevamp.core.broadcast.receivers;
+package its.madruga.warevamp.broadcast.receivers;
 
 import android.app.Application;
 import android.content.BroadcastReceiver;
@@ -20,7 +20,6 @@ public abstract class EventReceiver {
 
     public void registerReceiver(String action, BroadcastReceiver listener) {
         ContextCompat.registerReceiver(application, listener, new IntentFilter(action), ContextCompat.RECEIVER_EXPORTED);
-        listeners.put(action, listener);
     }
 
     public abstract void registerAllReceivers();

@@ -1,4 +1,4 @@
-package its.madruga.warevamp.core.broadcast.senders;
+package its.madruga.warevamp.broadcast.senders;
 
 import android.app.Application;
 import android.content.Intent;
@@ -15,7 +15,6 @@ public class EventEmitter {
     }
 
     public void emit(Intent intent) {
-        Log.d(TAG, "Emitting event: " + intent.getAction());
         application.sendBroadcast(intent);
     }
     public void emit(String event) {

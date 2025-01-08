@@ -1,4 +1,4 @@
-package its.madruga.warevamp.core.broadcast.receivers;
+package its.madruga.warevamp.broadcast.receivers;
 
 import static its.madruga.warevamp.module.hooks.core.HooksLoader.home;
 import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
@@ -7,11 +7,13 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import its.madruga.warevamp.core.broadcast.Events;
-import its.madruga.warevamp.core.broadcast.senders.WhatsAppSender;
+import de.robv.android.xposed.XposedBridge;
+import its.madruga.warevamp.broadcast.Events;
+import its.madruga.warevamp.broadcast.senders.WhatsAppSender;
 import its.madruga.warevamp.module.core.WppCallback;
 import its.madruga.warevamp.module.core.databases.AxolotlDatabase;
 import its.madruga.warevamp.module.core.databases.MsgstoreDatabase;
@@ -37,17 +39,21 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     private BroadcastReceiver onModuleStatusCheck() {
-        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_CHECK);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                WhatsAppSender.emitter.emit(Events.ACTION_WA_REVAMP_ENABLED);
+                var enabledIntent = new Intent(Events.ACTION_WA_REVAMP_ENABLED);
+                try {
+                    enabledIntent.putExtra("enabled", true);
+                    enabledIntent.putExtra("version", mApp.getPackageManager().getPackageInfo(mApp.getPackageName(), 0).versionName);
+                } catch (PackageManager.NameNotFoundException ignored) {
+                }
+                WhatsAppSender.emitter.emit(enabledIntent);
             }
         };
     }
 
     private BroadcastReceiver onRebootNeeded() {
-        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_NEED_REBOOT);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -57,7 +63,6 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public BroadcastReceiver onReboot() {
-        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_REBOOT);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -71,7 +76,6 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public BroadcastReceiver onCleanDatabase() {
-        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_CLEAN_DATABASE);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -98,7 +102,6 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public static boolean restartWhatsapp(Activity... activity) {
-        Log.d(EventReceiver.TAG, "Restarting WhatsApp");
         var targetActivity = activity.length > 0 ? activity[0] : home;
         Intent intent = mApp.getPackageManager().getLaunchIntentForPackage(mApp.getPackageName());
         if (mApp != null && targetActivity != null) {

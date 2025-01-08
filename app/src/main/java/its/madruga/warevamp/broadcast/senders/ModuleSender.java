@@ -1,9 +1,10 @@
-package its.madruga.warevamp.core.broadcast.senders;
+package its.madruga.warevamp.broadcast.senders;
 
 import android.content.Intent;
+import android.util.Log;
 
 import its.madruga.warevamp.App;
-import its.madruga.warevamp.core.broadcast.Events;
+import its.madruga.warevamp.broadcast.Events;
 
 public class ModuleSender extends EventEmitter {
 

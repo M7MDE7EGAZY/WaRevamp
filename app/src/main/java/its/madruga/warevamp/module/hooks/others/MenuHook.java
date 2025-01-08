@@ -21,7 +21,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
 import its.madruga.warevamp.BuildConfig;
-import its.madruga.warevamp.core.broadcast.receivers.WhatsAppReceiver;
+import its.madruga.warevamp.broadcast.receivers.WhatsAppReceiver;
 import its.madruga.warevamp.module.hooks.core.HooksBase;
 
 public class MenuHook extends HooksBase {

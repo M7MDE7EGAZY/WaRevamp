@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import its.madruga.warevamp.core.broadcast.senders.ModuleSender;
+import its.madruga.warevamp.broadcast.senders.ModuleSender;
 
 public class DatabaseUtils {
 

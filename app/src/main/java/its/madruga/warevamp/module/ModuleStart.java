@@ -17,8 +17,8 @@ import its.madruga.warevamp.BuildConfig;
 import its.madruga.warevamp.module.hooks.core.HooksLoader;
 import its.madruga.warevamp.module.hooks.media.DisableFlagSecureHook;
 import its.madruga.warevamp.module.references.ModuleResources;
-import its.madruga.warevamp.core.Utils;
-import its.madruga.warevamp.core.XposedChecker;
+import its.madruga.warevamp.app.core.Utils;
+import its.madruga.warevamp.app.core.XposedChecker;
 
 public class ModuleStart implements IXposedHookLoadPackage, IXposedHookInitPackageResources, IXposedHookZygoteInit {
     private static XSharedPreferences pref;

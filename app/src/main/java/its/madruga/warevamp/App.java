@@ -7,8 +7,8 @@ import com.google.android.material.color.DynamicColors;
 import java.util.ArrayList;
 import java.util.List;
 
-import its.madruga.warevamp.core.broadcast.receivers.ModuleReceiver;
-import its.madruga.warevamp.core.broadcast.senders.ModuleSender;
+import its.madruga.warevamp.broadcast.receivers.ModuleReceiver;
+import its.madruga.warevamp.broadcast.senders.ModuleSender;
 
 public class App extends Application {
     private static App instance;

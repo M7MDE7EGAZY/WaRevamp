@@ -1,13 +1,11 @@
-package its.madruga.warevamp.ui.activitys;
+package its.madruga.warevamp.app.ui.activitys;
 
-import static its.madruga.warevamp.core.Utils.WHATSAPP_PACKAGE;
-import static its.madruga.warevamp.core.Utils.isInstalled;
-import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
+import static its.madruga.warevamp.app.core.Utils.WHATSAPP_PACKAGE;
+import static its.madruga.warevamp.app.core.Utils.isInstalled;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -34,12 +32,12 @@ import java.util.Objects;
 import its.madruga.warevamp.App;
 import its.madruga.warevamp.BuildConfig;
 import its.madruga.warevamp.R;
-import its.madruga.warevamp.core.XposedChecker;
-import its.madruga.warevamp.core.broadcast.Events;
-import its.madruga.warevamp.core.broadcast.receivers.ModuleReceiver;
-import its.madruga.warevamp.core.broadcast.senders.ModuleSender;
+import its.madruga.warevamp.app.core.XposedChecker;
+import its.madruga.warevamp.broadcast.Events;
+import its.madruga.warevamp.broadcast.receivers.ModuleReceiver;
+import its.madruga.warevamp.broadcast.senders.ModuleSender;
 import its.madruga.warevamp.databinding.ActivityMainBinding;
-import its.madruga.warevamp.ui.views.InfoCard;
+import its.madruga.warevamp.app.ui.views.InfoCard;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 var appVersion = intent.getStringExtra("version");
-                var packageName = intent.getStringExtra("package");
 
                 SpannableString versionString1 = new SpannableString(App.getInstance().getString(R.string.whatsapp_version) + " " + appVersion);
                 versionString1.setSpan(new StyleSpan(Typeface.BOLD), 0, 18, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

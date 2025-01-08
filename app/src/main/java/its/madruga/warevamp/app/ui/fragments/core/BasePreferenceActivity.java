@@ -1,4 +1,4 @@
-package its.madruga.warevamp.ui.fragments.core;
+package its.madruga.warevamp.app.ui.fragments.core;
 
 import static android.content.Context.MODE_WORLD_READABLE;
 
@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
 import its.madruga.warevamp.BuildConfig;
-import its.madruga.warevamp.core.broadcast.senders.ModuleSender;
+import its.madruga.warevamp.broadcast.senders.ModuleSender;
 
 public class BasePreferenceActivity extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 

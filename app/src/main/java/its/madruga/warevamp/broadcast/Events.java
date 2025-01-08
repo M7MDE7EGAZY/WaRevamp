@@ -1,6 +1,4 @@
-package its.madruga.warevamp.core.broadcast;
-
-import android.content.Context;
+package its.madruga.warevamp.broadcast;
 
 import its.madruga.warevamp.BuildConfig;
 

@@ -17,7 +17,10 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import its.madruga.warevamp.core.broadcast.Receivers;
+import its.madruga.warevamp.broadcast.Receivers;
+import its.madruga.warevamp.broadcast.Senders;
+import its.madruga.warevamp.broadcast.receivers.WhatsAppReceiver;
+import its.madruga.warevamp.broadcast.senders.WhatsAppSender;
 import its.madruga.warevamp.module.core.WppCallback;
 import its.madruga.warevamp.module.hooks.customization.HideArchivedChatsHook;
 import its.madruga.warevamp.module.hooks.media.DownloadStatusHook;
@@ -45,6 +48,7 @@ public class HooksLoader {
 
     public static void initialize(XSharedPreferences pref, ClassLoader loader, String sourceDir) {
 
+        XposedBridge.log("Starting WhatsApp Broadcasts");
         if (!References.initDexKit(sourceDir)) {
             XposedBridge.log("Unable to start DexKit");
             return;
@@ -52,6 +56,7 @@ public class HooksLoader {
             XposedBridge.log("DexKit Init");
         }
 
+        XposedBridge.log("Starting WhatsApp Broadcasts");
         XposedHelpers.findAndHookMethod(Instrumentation.class, "callApplicationOnCreate", Application.class, new XC_MethodHook() {
             protected void beforeHookedMethod(MethodHookParam param) throws Exception {
                 mApp = (Application) param.args[0];
@@ -59,7 +64,10 @@ public class HooksLoader {
                 ReferencesCache.init(mApp, loader);
                 References.start();
                 plugins(loader, pref);
-                Receivers.registerReceivers();
+                // Initializing WhatsApp Broadcasts
+                XposedBridge.log("Starting WhatsApp Broadcasts");
+                WhatsAppSender.start();
+                WhatsAppReceiver.start();
             }
         });
 

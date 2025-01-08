@@ -1,4 +1,4 @@
-package its.madruga.warevamp.ui.fragments;
+package its.madruga.warevamp.app.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +13,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import its.madruga.warevamp.App;
 import its.madruga.warevamp.R;
-import its.madruga.warevamp.core.XposedChecker;
-import its.madruga.warevamp.core.broadcast.senders.ModuleSender;
+import its.madruga.warevamp.app.core.XposedChecker;
+import its.madruga.warevamp.broadcast.senders.ModuleSender;
 import its.madruga.warevamp.databinding.RootFragmentBinding;
-import its.madruga.warevamp.ui.activitys.AboutActivity;
-import its.madruga.warevamp.ui.fragments.core.BaseFragment;
-import its.madruga.warevamp.ui.fragments.core.BasePreferenceActivity;
+import its.madruga.warevamp.app.ui.activitys.AboutActivity;
+import its.madruga.warevamp.app.ui.fragments.core.BaseFragment;
+import its.madruga.warevamp.app.ui.fragments.core.BasePreferenceActivity;
 
 public class RootFragment extends BaseFragment {
     RootFragmentBinding binding;
