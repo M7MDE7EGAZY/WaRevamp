@@ -7,6 +7,10 @@ public class ModuleReceiver extends EventReceiver {
         super(App.getInstance());
     }
 
+    public static void start() {
+        new ModuleReceiver().registerAllReceivers();
+    }
+
     @Override
     public void registerAllReceivers() {
 

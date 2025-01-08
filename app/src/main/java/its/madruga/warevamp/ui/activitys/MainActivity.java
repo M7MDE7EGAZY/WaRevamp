@@ -85,25 +85,21 @@ public class MainActivity extends AppCompatActivity {
         new ModuleReceiver().registerReceiver(Events.ACTION_WA_REVAMP_ENABLED, new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                try {
-                    var appVersion = mApp.getPackageManager().getPackageInfo(mApp.getPackageName(), 0).versionName;
-                    var packageName = mApp.getPackageName();
+                var appVersion = intent.getStringExtra("version");
+                var packageName = intent.getStringExtra("package");
 
-                    SpannableString versionString1 = new SpannableString(App.getInstance().getString(R.string.whatsapp_version) + " " + appVersion);
-                    versionString1.setSpan(new StyleSpan(Typeface.BOLD), 0, 18, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    versionString1.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 18, versionString1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    infoCard.setWaVersion(versionString1);
+                SpannableString versionString1 = new SpannableString(App.getInstance().getString(R.string.whatsapp_version) + " " + appVersion);
+                versionString1.setSpan(new StyleSpan(Typeface.BOLD), 0, 18, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                versionString1.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 18, versionString1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                infoCard.setWaVersion(versionString1);
 
-                    SpannableString rebootString = new SpannableString(App.getInstance().getString(R.string.reboot_wpp));
-                    rebootString.setSpan(new StyleSpan(Typeface.BOLD), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    rebootString.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    wppReboot.setSubTitle(rebootString);
+                SpannableString rebootString = new SpannableString(App.getInstance().getString(R.string.reboot_wpp));
+                rebootString.setSpan(new StyleSpan(Typeface.BOLD), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                rebootString.setSpan(new ForegroundColorSpan(MaterialColors.getColor(binding.getRoot(), com.google.android.material.R.attr.colorPrimary)), 0, rebootString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                wppReboot.setSubTitle(rebootString);
 
-                    binding.wppReboot.setVisibility(View.VISIBLE);
-                    wppReboot.setEnabled(true);
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.e("WaRevamp", "Error: " + e.getMessage());
-                }
+                binding.wppReboot.setVisibility(View.VISIBLE);
+                wppReboot.setEnabled(true);
 
             }
         });

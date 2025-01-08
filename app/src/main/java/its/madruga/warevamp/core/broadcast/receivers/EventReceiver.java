@@ -12,6 +12,7 @@ public abstract class EventReceiver {
     public Application application;
     public HashMap<String, BroadcastReceiver> listeners = new HashMap<>();
 
+    public static final String TAG = "EventReceiver";
     public EventReceiver(Application application) {
         this.application = application;
         registerAllReceivers();

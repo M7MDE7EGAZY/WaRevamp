@@ -7,6 +7,8 @@ import its.madruga.warevamp.core.broadcast.Events;
 
 public class ModuleSender extends EventEmitter {
 
+    public static ModuleSender emitter;
+
     public ModuleSender() {
         super(App.getInstance());
     }
@@ -31,5 +33,9 @@ public class ModuleSender extends EventEmitter {
         var intent = new Intent(Events.ACTION_WA_REVAMP_CLEAN_DATABASE);
         intent.putExtra("dbName", database);
         emitter.emit(intent);
+    }
+
+    public static void start() {
+        emitter = new ModuleSender();
     }
 }

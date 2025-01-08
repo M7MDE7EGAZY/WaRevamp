@@ -1,5 +1,7 @@
 package its.madruga.warevamp.core.broadcast;
 
+import android.content.Context;
+
 import its.madruga.warevamp.BuildConfig;
 
 public class Events {

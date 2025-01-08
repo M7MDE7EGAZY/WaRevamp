@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import its.madruga.warevamp.core.broadcast.Events;
@@ -23,6 +24,10 @@ public class WhatsAppReceiver extends EventReceiver {
         super(mApp);
     }
 
+    public static void start() {
+        new WhatsAppReceiver().registerAllReceivers();
+    }
+
     @Override
     public void registerAllReceivers() {
         registerReceiver(Events.ACTION_WA_REVAMP_CHECK, onModuleStatusCheck());
@@ -32,6 +37,7 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     private BroadcastReceiver onModuleStatusCheck() {
+        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_CHECK);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -41,6 +47,7 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     private BroadcastReceiver onRebootNeeded() {
+        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_NEED_REBOOT);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -50,6 +57,7 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public BroadcastReceiver onReboot() {
+        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_REBOOT);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -63,6 +71,7 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public BroadcastReceiver onCleanDatabase() {
+        Log.d(EventReceiver.TAG, "Received event: " + Events.ACTION_WA_REVAMP_CLEAN_DATABASE);
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -89,6 +98,7 @@ public class WhatsAppReceiver extends EventReceiver {
     }
 
     public static boolean restartWhatsapp(Activity... activity) {
+        Log.d(EventReceiver.TAG, "Restarting WhatsApp");
         var targetActivity = activity.length > 0 ? activity[0] : home;
         Intent intent = mApp.getPackageManager().getLaunchIntentForPackage(mApp.getPackageName());
         if (mApp != null && targetActivity != null) {
