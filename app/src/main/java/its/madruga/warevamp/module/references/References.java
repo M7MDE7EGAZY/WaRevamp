@@ -111,7 +111,7 @@ public class References {
     public synchronized static Class<?> keyMessageClass(ClassLoader loader) throws Exception {
         Class<?> result = getClazz("keyMessageClass");
         if (result != null) return result;
-        result = getIns().findClassByString(StringMatchType.Contains, loader, "Key(id=", ", isFromMe=", ", chatJid=");
+        result = getIns().findClassByString(StringMatchType.Contains, loader, "Key(id=", ", isFromMe=");
         if (result == null) throw new Exception("KeyMessage class not found");
         saveClassPath(result, "keyMessageClass");
         return result;

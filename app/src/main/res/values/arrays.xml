@@ -13,4 +13,22 @@
         <item>text</item>
         <item>icon</item>
     </string-array>
+    <string-array name="custom_priv_entries">
+        <item>@string/antirevoke</item>
+        <item>@string/viewonce</item>
+        <item>@string/freeze_last_seen</item>
+        <item>@string/hidereceipt</item>
+        <item>@string/hide_read</item>
+        <item>@string/hide_typing</item>
+        <item>@string/hide_recording</item>
+    </string-array>
+    <string-array name="custom_priv_values">
+        <item>antiRevoke</item>
+        <item>viewOnce</item>
+        <item>freeze_last_seen</item>
+        <item>hideReceipt</item>
+        <item>hide_read</item>
+        <item>hide_typing</item>
+        <item>hide_recording</item>
+    </string-array>
 </resources>

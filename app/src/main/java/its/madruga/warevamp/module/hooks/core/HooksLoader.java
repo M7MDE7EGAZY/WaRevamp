@@ -17,14 +17,13 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import its.madruga.warevamp.broadcast.Receivers;
-import its.madruga.warevamp.broadcast.Senders;
 import its.madruga.warevamp.broadcast.receivers.WhatsAppReceiver;
 import its.madruga.warevamp.broadcast.senders.WhatsAppSender;
 import its.madruga.warevamp.module.core.WppCallback;
 import its.madruga.warevamp.module.hooks.customization.HideArchivedChatsHook;
 import its.madruga.warevamp.module.hooks.media.DownloadStatusHook;
 import its.madruga.warevamp.module.hooks.media.DownloadViewOnceHook;
+import its.madruga.warevamp.module.hooks.functions.CustomPrivacyHook;
 import its.madruga.warevamp.module.hooks.others.PinnedLimit;
 import its.madruga.warevamp.module.hooks.customization.SeparateGroupsHook;
 import its.madruga.warevamp.module.hooks.others.MenuHook;
@@ -104,7 +103,8 @@ public class HooksLoader {
                 DownloadStatusHook.class,
                 DownloadViewOnceHook.class,
                 HideTypingRecordingHook.class,
-                FreezeLastSeenHook.class
+                FreezeLastSeenHook.class,
+                CustomPrivacyHook.class
         };
 
         for (var c : classes) {

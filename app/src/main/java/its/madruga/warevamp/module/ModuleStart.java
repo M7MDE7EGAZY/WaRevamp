@@ -67,6 +67,12 @@ public class ModuleStart implements IXposedHookLoadPackage, IXposedHookInitPacka
            field.set(null, addedResId);
         }
 
+        for (Field field : ModuleResources.array.class.getFields()) {
+            int resId = res.getIdentifier(field.getName(), "array", BuildConfig.APPLICATION_ID);
+            int addedResId = resparam.res.addResource(res, resId);
+            field.set(null, addedResId);
+        }
+
         for (Field field : ModuleResources.drawable.class.getFields()) {
             int resId = res.getIdentifier(field.getName(), "drawable", BuildConfig.APPLICATION_ID);
             int addedResId = resparam.res.addResource(res, resId);

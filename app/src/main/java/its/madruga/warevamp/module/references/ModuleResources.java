@@ -16,5 +16,12 @@ public class ModuleResources {
         public static int clean_database_ok;
         public static int download_status;
         public static int download_viewonce;
+        public static int custom_privacy;
+    }
+
+    public static class array {
+        public static int custom_priv_entries;
+        public static int custom_priv_values;
+
     }
 }

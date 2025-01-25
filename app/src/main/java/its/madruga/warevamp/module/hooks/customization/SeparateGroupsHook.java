@@ -66,6 +66,7 @@ public class SeparateGroupsHook extends HooksBase {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 var object = param.args[2];
                 var desc = XposedHelpers.getObjectField(object, "A06");
+                log(desc != null ? desc.toString() : "void");
                 if (desc == null) return;
                 var split = desc.toString().split(":");
                 var id = 0;

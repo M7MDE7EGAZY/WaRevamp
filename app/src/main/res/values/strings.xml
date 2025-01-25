@@ -18,6 +18,7 @@
     <string name="general">General</string>
     <string name="general_sum">WhatsApp Theme • Clean Database</string>
     <string name="privacy">Privacy</string>
+    <string name="custom_privacy">Custom Privacy</string>
     <string name="privacy_sum">Anti-Delete Options • View Once • Hide Receipt</string>
     <string name="home">Home Screen</string>
     <string name="home_sum">Separate Groups • Toolbar Settings</string>"
