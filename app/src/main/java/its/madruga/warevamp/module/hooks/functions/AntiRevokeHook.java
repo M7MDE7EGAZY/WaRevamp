@@ -57,9 +57,9 @@ public class AntiRevokeHook extends HooksBase {
                 FMessageInfo.Key key = fMessageInfo.getKey();
                 String id = stripJID(getRawString(fMessageInfo.getKey().remoteJid));
 
-                if (!antiRevoke.equals("disable") || !antiRevokeStatus.equals("disable") || getCustomPref(id, "antiRevoke") && !key.isFromMe) {
+                if ((!antiRevoke.equals("disable") || !antiRevokeStatus.equals("disable") || getCustomPref(id, "antiRevoke")) && !key.isFromMe) {
                     if (!antiRevoke(fMessageInfo).equals("disable")) param.setResult(true);
-                }
+                } else super.beforeHookedMethod(param);
             }
         });
 

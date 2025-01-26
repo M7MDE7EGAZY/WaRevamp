@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
 import static its.madruga.warevamp.module.references.ModuleResources.array.custom_priv_entries;
 import static its.madruga.warevamp.module.references.ModuleResources.array.custom_priv_values;
+import static its.madruga.warevamp.module.references.ModuleResources.drawable.twotone_auto_awesome_24;
 import static its.madruga.warevamp.module.references.ModuleResources.string.custom_privacy;
 
 import android.app.Activity;
@@ -93,6 +94,7 @@ public class CustomPrivacyHook extends HooksBase {
         mList.setEntries(entries);
         mList.setEntryValues(values);
         mList.setTitle(mApp.getString(custom_privacy));
+        mList.setIcon(mApp.getDrawable(WppUtils.getResourceId("ic_stars", "drawable")));
         mList.setDialogTitle(mApp.getString(custom_privacy));
         mList.setKey(id);
         return mList;

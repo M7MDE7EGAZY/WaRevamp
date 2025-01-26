@@ -6,6 +6,7 @@ public class ModuleResources {
 
     public static class drawable {
         public static int download_icon;
+        public static int twotone_auto_awesome_24;
     }
 
     public static class string {
