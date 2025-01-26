@@ -17,6 +17,7 @@ public class ModuleResources {
         public static int download_status;
         public static int download_viewonce;
         public static int custom_privacy;
+        public static int tab_groups;
     }
 
     public static class array {

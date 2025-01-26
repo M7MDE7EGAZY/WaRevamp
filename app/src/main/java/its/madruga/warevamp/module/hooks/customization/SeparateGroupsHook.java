@@ -19,6 +19,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import static its.madruga.warevamp.module.hooks.core.HooksLoader.mApp;
+import static its.madruga.warevamp.module.references.ModuleResources.string.tab_groups;
 import static its.madruga.warevamp.module.references.References.*;
 import static its.madruga.warevamp.module.references.ReferencesUtils.getFieldByExtendType;
 import static its.madruga.warevamp.module.references.ReferencesUtils.getFieldByType;
@@ -241,7 +243,7 @@ public class SeparateGroupsHook extends HooksBase {
                 super.beforeHookedMethod(param);
                 var tab = (int) param.args[0];
                 if (tab == GROUPS) {
-                    param.setResult("Groups");
+                    param.setResult(mApp.getString(tab_groups));
                 }
             }
         });

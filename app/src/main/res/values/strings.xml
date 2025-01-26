@@ -81,4 +81,7 @@
     <string name="hide_typing_sum">When active, the person cannot see that you are typing.</string>
     <string name="freeze_last_seen">Freeze last seen</string>
     <string name="freeze_last_seen_sum">When it\'is enabled, you\'ll don\'t see any presence updates from other users, like typing, recording, online.</string>
+    <string name="antirevoke_show_text">Show text</string>
+    <string name="antirevoke_show_icon">Show icon</string>
+    <string name="tab_groups">Groups</string>
 </resources>
