@@ -137,7 +137,8 @@ public class CustomPrivacyHook extends HooksBase {
     }
 
     public static boolean getCustomPref(String id, String key) {
+        if (id == null || key == null) return false;
         Set<String> set = cPref.getStringSet(id, null);
-        return set.contains(key);
+        return set != null && set.contains(key);
     }
 }
